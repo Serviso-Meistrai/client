@@ -11,13 +11,10 @@ function App() {
     //    <Routes>
     //      <Route path="/">
     <>
-      {/* <Home /> */}
-
-      <div className="flex min-h-[90vh] flex-col items-center justify-center">
-        {/* <Login />
-        <Register /> */}
-        <CreateService />
-      </div>
+      <Home />
+      {/* <Login /> */}
+      {/* <Register /> */}
+      {/* <CreateService /> */}
     </>
 
     //      </Route>
