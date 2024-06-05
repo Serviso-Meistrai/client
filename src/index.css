@@ -75,6 +75,10 @@
   }
 }
 
+.pageContainer {
+  @apply flex min-h-[90vh] flex-col items-center justify-center;
+}
+
 #root {
   margin: 0 auto;
   padding: 2rem;
