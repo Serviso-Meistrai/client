@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -45,9 +46,9 @@ const Register = () => {
           </div>
           <div className="mt-4 flex justify-center gap-1 text-center text-sm">
             Have an account?
-            <a href="#" className="cursor-pointer underline">
+            <Link to="/login" className="cursor-pointer underline">
               Sign in
-            </a>
+            </Link>
           </div>
         </CardContent>
       </Card>
