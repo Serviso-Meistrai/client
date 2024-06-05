@@ -5,13 +5,12 @@ import Register from "./Register";
 
 const Home = () => {
   return (
-    <>
+    <div className="h-[100vh]">
       <NavBar />
-      <main className="grid h-[80vh] items-center">
-        <Login />
-        {/* <Register /> */}
+      <main className="">
+        <div></div>
       </main>
-    </>
+    </div>
   );
 };
 

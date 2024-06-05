@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 
 const Register = () => {
   return (
-    <Card className="mx-auto max-w-sm p-10">
+    <Card className="w-[20rem]">
       <CardHeader>
         <CardTitle className="text-2xl">Register</CardTitle>
       </CardHeader>
@@ -31,7 +31,7 @@ const Register = () => {
             <Input id="password" type="password" required />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">Re-Type Password</Label>
+            <Label htmlFor="repassword">Re-Type Password</Label>
 
             <Input id="repassword" type="password" required />
           </div>
@@ -42,7 +42,7 @@ const Register = () => {
             Cancel
           </Button>
         </div>
-        <div className="mt-4 flex gap-1 text-center text-sm">
+        <div className="mt-4 flex justify-center gap-1 text-center text-sm">
           Have an account?
           <a href="#" className="cursor-pointer underline">
             Sign in

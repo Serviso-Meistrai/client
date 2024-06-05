@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 
 const Login = () => {
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="w-[20rem]">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
       </CardHeader>
@@ -29,10 +29,10 @@ const Login = () => {
             Login
           </Button>
           <Button variant="outline" className="w-full">
-            Cancel
+            Back
           </Button>
         </div>
-        <div className="mt-4 flex gap-1 text-center text-sm">
+        <div className="mt-4 flex justify-center gap-1 text-center text-sm">
           Don&apos;t have an account?
           <a href="#" className="cursor-pointer underline">
             Sign up
