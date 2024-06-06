@@ -12,8 +12,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogoutButton } from "./LogoutButton";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
       <form className="ml-auto flex-1 sm:flex-initial">
@@ -30,14 +32,18 @@ const NavBar = () => {
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
             <CircleUser className="h-5 w-5" />
-            {/* -----change to depending on login state avatar---- */}
+            {/* -----change avatar depending on login state ---- */}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Create New Service</DropdownMenuItem>
-          <DropdownMenuItem>Delete My Services</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate("/create")}>
+            Create New Service
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => navigate("/manage")}>
+            Manage My Services
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <LogoutButton />
         </DropdownMenuContent>

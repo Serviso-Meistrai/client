@@ -2,8 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useNavigate } from "react-router-dom";
 
 const CreateService = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="pageContainer">
       <Card className="w-[22rem]">
@@ -36,11 +39,19 @@ const CreateService = () => {
               <Label htmlFor="city">City</Label>
               <Input id="city" type="text" required />
             </div>
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              onClick={() => navigate("/")}
+            >
               Create Service
             </Button>
-            <Button variant="outline" className="w-full">
-              Back
+            <Button
+              onClick={() => navigate("/")}
+              variant="outline"
+              className="w-full"
+            >
+              Cancel
             </Button>
           </div>
         </CardContent>
