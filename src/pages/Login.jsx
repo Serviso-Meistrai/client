@@ -33,15 +33,13 @@ const Login = () => {
             <Button type="submit" className="w-full">
               Login
             </Button>
-            <Link to="/">
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => navigate("/")}
-              >
-                Cancel
-              </Button>
-            </Link>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => navigate("/")}
+            >
+              Cancel
+            </Button>
           </div>
           <div className="mt-4 flex justify-center gap-1 text-center text-sm">
             Don&apos;t have an account?
