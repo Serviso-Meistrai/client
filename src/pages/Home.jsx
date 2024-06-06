@@ -2,7 +2,7 @@ import NavBar from "@/components/NavBar";
 
 const Home = () => {
   return (
-    <div className="h-[100vh]">
+    <div className="min-h-[90vh]">
       <NavBar />
       <main className="">
         <div></div>
