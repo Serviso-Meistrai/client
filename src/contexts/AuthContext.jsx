@@ -76,13 +76,27 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function login() {
+  async function login(email, password) {
     try {
       const res = await axios.post(`${BASE_URL}/login`, {
         email,
         password,
       });
 
+      dispatch({
+        type: "login",
+        payload: {
+          email,
+          password,
+        },
+      });
+
+      const { token, username, _id } = res.data;
+
+      localStorage.setItem(
+        "userData",
+        JSON.stringify({ token, username, _id }),
+      );
       console.log(res);
     } catch (err) {
       console.error(err);
