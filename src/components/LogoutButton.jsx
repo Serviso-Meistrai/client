@@ -10,8 +10,11 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const LogoutButton = () => {
+  const { logout } = useAuth();
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -28,7 +31,10 @@ export const LogoutButton = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+          <AlertDialogAction
+            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            onClick={logout}
+          >
             Logout
           </AlertDialogAction>
         </AlertDialogFooter>

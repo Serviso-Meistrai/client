@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const AuthContext = createContext();
 
@@ -18,17 +18,17 @@ function reducer(state, action) {
     case "register":
       return {
         ...state,
-        username: action.payload,
-        email: action.payload,
-        password: action.payload,
-        repeatPassword: action.payload,
+        username: action.payload.username,
+        email: action.payload.email,
+        password: action.payload.password,
+        repeatPassword: action.payload.repeatPassword,
         isAuthenticated: true,
       };
     case "login":
       return {
         ...state,
-        email: action.payload,
-        password: action.payload,
+        username: action.payload.username,
+        email: action.payload.email,
         isAuthenticated: true,
       };
     case "logout":
@@ -40,7 +40,6 @@ function reducer(state, action) {
         repeatPassword: "",
         isAuthenticated: false,
       };
-
     default:
       throw new Error("Unknown action");
   }
@@ -51,6 +50,18 @@ function AuthProvider({ children }) {
     { username, email, password, repeatPassword, isAuthenticated },
     dispatch,
   ] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const storeUserData = localStorage.getItem("userData");
+    if (storeUserData) {
+      const { username, email } = JSON.parse(storeUserData);
+      dispatch({
+        type: "login",
+        payload: { username, email },
+      });
+      console.log(username);
+    }
+  }, []);
 
   async function register(username, email, password, repeatPassword) {
     try {
@@ -70,6 +81,8 @@ function AuthProvider({ children }) {
         },
       });
 
+      localStorage.setItem("userData", JSON.stringify({ username, email }));
+
       console.log(res);
     } catch (err) {
       console.error(err);
@@ -83,15 +96,15 @@ function AuthProvider({ children }) {
         password,
       });
 
+      const { token, username, _id } = res.data;
+
       dispatch({
         type: "login",
         payload: {
+          username,
           email,
-          password,
         },
       });
-
-      const { token, username, _id } = res.data;
 
       localStorage.setItem(
         "userData",
@@ -104,6 +117,7 @@ function AuthProvider({ children }) {
   }
 
   function logout() {
+    localStorage.removeItem("userData");
     dispatch({ type: "logout" });
   }
 
