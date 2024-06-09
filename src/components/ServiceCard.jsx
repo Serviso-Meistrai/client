@@ -17,8 +17,9 @@ const ServiceCard = ({ service }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <p>{service.name}</p>
-        <p>{service.surname}</p>
+        <p>
+          {service.name} {service.surname}
+        </p>
         <p>{service.specialization}</p>
       </CardContent>
       <CardFooter>

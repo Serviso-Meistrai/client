@@ -23,7 +23,7 @@ export const LogoutButton = () => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure you want to log out?</AlertDialogTitle>
           <AlertDialogDescription>
-            You might miss your chance to find the best Auto Service
+            Some features won't be accessible.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
