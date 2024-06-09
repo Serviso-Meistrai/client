@@ -78,7 +78,7 @@ const Register = () => {
                 />
               </div>
               <Button type="submit" className="w-full">
-                Login
+                Register
               </Button>
               <Button
                 variant="outline"
