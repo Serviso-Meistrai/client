@@ -5,17 +5,14 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreateService from "./pages/CreateService";
 import ManageServices from "./pages/ManageServices";
-import React, { useState } from "react";
+import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
-
-export const userContext = React.createContext(null);
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
-  const [user, setUser] = useState(null);
-
   return (
     <BrowserRouter>
-      <userContext.Provider value={{ user: user, setUser: setUser }}>
+      <AuthProvider>
         <Routes>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
@@ -38,7 +35,7 @@ function App() {
           />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Routes>
-      </userContext.Provider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const Rating = () => {
     const [rated, setRated] = useState(0)
-    const []
 
     const handleClick =(e)=>{
         setRated(e.target.value)
