@@ -1,0 +1,10 @@
+
+.stars{
+    display:flex;
+}
+.stars>li{
+    cursor: pointer;
+}
+.star_true{
+    color: rgb(255, 221, 0);
+}

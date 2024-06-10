@@ -19,3 +19,4 @@ const Home = ({ filteredServices }) => {
 };
 
 export default Home;
+
