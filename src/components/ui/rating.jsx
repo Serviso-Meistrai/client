@@ -1,5 +1,5 @@
-import { createLike, updateLike } from '@/services/likes/likesServices'
-import React, { useEffect, useState } from 'react'
+import { createLike, updateLike } from "@/services/likes/likesServices";
+import React, { useEffect, useState } from "react";
 
 const Rating = ({ service, setServices }) => {
     const [rated, setRated] = useState(0)
@@ -59,7 +59,7 @@ const Rating = ({ service, setServices }) => {
             <h6>({counter})</h6>
         </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Rating
+export default Rating;

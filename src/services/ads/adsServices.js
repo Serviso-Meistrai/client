@@ -34,7 +34,7 @@ export const getUserServices = (setData, userToken) => {
     .catch((err) => console.error(err));
 };
 //POST Service
-export const createService = (data, userToken, setData) => {
+export const createService = (data, userToken) => {
   axios
     .post(`http://localhost:5000/api/ads`, data, {
       headers: {
@@ -42,7 +42,7 @@ export const createService = (data, userToken, setData) => {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => getServices(setData))
+    .then((res) => console.log(res))
     .catch((err) => console.error(err));
 };
 //Update Service
