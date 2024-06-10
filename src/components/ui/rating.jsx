@@ -7,22 +7,31 @@ const Rating = ({service}) => {
     const token = JSON.parse(localStorage.getItem("userData"))?.token
     const userId = JSON.parse(localStorage.getItem("userData"))?._id
     const adId = service._id
+    const [likeId, setLikeId] = useState("")
 
     useEffect(()=>{
-        service.likes.forEach(like => {
+        let sum = 0 
+        let count = 0 
+        service?.likes.forEach(like => {
             if(userId===like.user){
                 setRated(like.value)
-                console.log(like);
+                setLikeId(like._id)
             }
+            count = count + 1
+            sum = sum + like.value
+            sum = sum / count
+            
+            setRatedA(sum)
+            console.log(sum);
         })
     },[])
     const handleClick =(e)=>{
         if(rated==0){
             setRated(e.target.value)
-            createLike({value: rated, adId: adId},token)
+            createLike({value: e.target.value, adId: adId},token)
         }else{
             setRated(e.target.value)
-            updateLike({value: rated, adId: adId},token,likeId)
+            updateLike({value: e.target.value, adId: adId},token,likeId)
         }
             
     }
@@ -33,19 +42,19 @@ const Rating = ({service}) => {
         {token?
             <ul className='stars'>
                 <h6>My rating: </h6>
-                <li title='1' value={1} className={rated>=1?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
-                <li title='2' value={2} className={rated>=2?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
-                <li title='3' value={3} className={rated>=3?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
-                <li title='4' value={4} className={rated>=4?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
-                <li title='5' value={5} className={rated>=5?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
+                <li title='1 Star' value={1} className={rated>=1?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
+                <li title='2 Stars' value={2} className={rated>=2?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
+                <li title='3 Stars' value={3} className={rated>=3?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
+                <li title='4 Stars' value={4} className={rated>=4?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
+                <li title='5 Stars' value={5} className={rated>=5?"star_true":"star_false"} onClick={handleClick}>&#9733;</li>
             </ul>:null}
         <ul className='stars_avarage'>
-            <h6>Avarage:</h6>
-            <li title='1' className={ratedA>=1?"star_true":"star_false"}>&#9733;</li>
-            <li title='2' className={ratedA>=2?"star_true":"star_false"}>&#9733;</li>
-            <li title='3' className={ratedA>=3?"star_true":"star_false"}>&#9733;</li>
-            <li title='4' className={ratedA>=4?"star_true":"star_false"}>&#9733;</li>
-            <li title='5' className={ratedA>=5?"star_true":"star_false"}>&#9733;</li>
+            <h6>Avarage: </h6>
+            <li title='1 Star' className={ratedA>=1?"star_true":"star_false"}>&#9733;</li>
+            <li title='2 Stars' className={ratedA>=2?"star_true":"star_false"}>&#9733;</li>
+            <li title='3 Stars' className={ratedA>=3?"star_true":"star_false"}>&#9733;</li>
+            <li title='4 Stars' className={ratedA>=4?"star_true":"star_false"}>&#9733;</li>
+            <li title='5 Stars' className={ratedA>=5?"star_true":"star_false"}>&#9733;</li>
         </ul>
     </div>
   )
