@@ -1,4 +1,5 @@
-import ServiceCard from "@/components/ServiceCard";
+import ServiceCard from "@/contexts/ServiceCard";
+
 
 const Home = ({ filteredServices }) => {
   return (

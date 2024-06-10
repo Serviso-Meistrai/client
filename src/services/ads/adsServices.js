@@ -7,58 +7,51 @@ import axios from "axios";
 //     specialization: "...",
 //     serviceName: "...",
 //     img: "...",
-//     city: "...", 
+//     city: "...",
 // }
 
-
 //GET Services
-export const getServices=(setData)=>{
-    axios
-        .get(`http://localhost:5000/api/ads`)
-        .then((res)=>{
-            setData(res.data)
-        })
-        .catch((err)=>console.error(err))
-}
+export const getServices = (setData) => {
+  axios
+    .get(`http://localhost:5000/api/ads`)
+    .then((res) => {
+      setData(res.data);
+    })
+    .catch((err) => console.error(err));
+};
 //POST Service
-export const createService=(data, userToken)=>{
-    axios
-        .post(`http://localhost:5000/api/ads`, data, 
-        {
-            headers: {
-              Authorization: `Bearer ${userToken}`,
-              'Content-Type': 'application/json',
-            }
-        }
-        )
-        .then((res)=>alert("Created"))
-        .catch((err)=>console.error(err))
-}
+export const createService = (data, userToken) => {
+  axios
+    .post(`http://localhost:5000/api/ads`, data, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => alert("Created"))
+    .catch((err) => console.error(err));
+};
 //Update Service
 export const updateService = (data, adId, userToken) => {
-    axios
-    .put(`http://localhost:5000/api/ads/${adId}`, data, 
-    {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          'Content-Type': 'application/json',
-        }
-    }
-    )
-    .then((res)=>alert("Updated"))
-    .catch((err)=>console.error(err))
-}
+  axios
+    .put(`http://localhost:5000/api/ads/${adId}`, data, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => alert("Updated"))
+    .catch((err) => console.error(err));
+};
 // Delete Service
 export const deleteService = (adId, userToken) => {
-    axios
-    .delete(`http://localhost:5000/api/ads/${adId}`, 
-    {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          'Content-Type': 'application/json',
-        }
-    }
-    )
-    .then((res)=>alert("Deleted"))
-    .catch((err)=>console.error(err))
-}
+  axios
+    .delete(`http://localhost:5000/api/ads/${adId}`, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => alert("Deleted"))
+    .catch((err) => console.error(err));
+};
