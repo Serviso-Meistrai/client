@@ -16,7 +16,7 @@ const ServiceCard = ({ service }) => {
         <div>
           <CardTitle>{service.serviceName}</CardTitle>
           <CardDescription>{service.city}</CardDescription>
-          {service.user === user._id && <DeleteButton id={service._id} />}
+          <DeleteButton id={service._id} />
         </div>
       </CardHeader>
       <CardContent>
