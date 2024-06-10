@@ -17,12 +17,17 @@ const ServiceCard = ({ service }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <p>{service.name}</p>
-        <p>{service.surname}</p>
+        <p>
+          {service.name} {service.surname}
+        </p>
         <p>{service.specialization}</p>
       </CardContent>
       <CardFooter>
-        <img src={service.img} alt="Service Image" />
+        <img
+          src={service.img}
+          alt="Service Image"
+          className="w-full rounded-lg"
+        />
       </CardFooter>
     </Card>
   );
