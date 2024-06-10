@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -14,13 +14,25 @@ import {
 import { LogoutButton } from "./LogoutButton";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import ThemeSwitch from "./ThemeSwitch";
 
-const NavBar = () => {
+const NavBar = ({ services, setFilteredServices }) => {
   const navigate = useNavigate();
   const { isAuthenticated, username } = useAuth();
 
+  const [searchInput, setSearchInput] = useState("");
+
+  useEffect(() => {
+    setFilteredServices(
+      services.filter((service) =>
+        service.serviceName.toLowerCase().includes(searchInput.toLowerCase()),
+      ),
+    );
+  }, [searchInput, services]);
+
   return (
     <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+      <ThemeSwitch />
       {isAuthenticated && <p>Hello, {username}</p>}
       <form className="ml-auto flex-1 sm:flex-initial">
         <div className="relative">
@@ -29,6 +41,9 @@ const NavBar = () => {
             type="search"
             placeholder="Search services..."
             className="pl-8 sm:w-[200px] md:w-[200px] lg:w-[300px]"
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+            }}
           />
         </div>
       </form>
@@ -40,16 +55,43 @@ const NavBar = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel className="flex justify-center">
+            My Account
+          </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => navigate("/create")}>
-            Create New Service
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => navigate("/manage")}>
-            Manage My Services
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <LogoutButton />
+          {isAuthenticated ? (
+            <>
+              <DropdownMenuItem
+                onClick={() => navigate("/create")}
+                className="justify-center"
+              >
+                Create New Service
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate("/manage")}
+                className="justify-center"
+              >
+                Manage My Services
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <LogoutButton />
+            </>
+          ) : (
+            <>
+              <DropdownMenuItem
+                onClick={() => navigate("/login")}
+                className="justify-center"
+              >
+                Login
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate("/register")}
+                className="justify-center"
+              >
+                Register
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
