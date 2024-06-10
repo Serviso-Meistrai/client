@@ -8,18 +8,32 @@ import { useService } from "@/contexts/ServicesContext";
 import { useAuth } from "@/contexts/AuthContext";
 
 const CreateService = () => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [specialization, setSpecialization] = useState("");
-  const [serviceName, setServiceName] = useState("");
-  const [img, setImg] = useState("");
-  const [city, setCity] = useState("");
+  // const [name, setName] = useState("");
+  // const [surname, setSurname] = useState("");
+  // const [specialization, setSpecialization] = useState("");
+  // const [serviceName, setServiceName] = useState("");
+  // const [img, setImg] = useState("");
+  // const [city, setCity] = useState("");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    specialization: "",
+    serviceName: "",
+    img: "",
+    city: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { createAd } = useService();
-
-  console.log(createAd);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -29,32 +43,16 @@ const CreateService = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await createAd(name, surname, specialization, serviceName, img, city);
+    await createAd(
+      formData.name,
+      formData.surname,
+      formData.specialization,
+      formData.serviceName,
+      formData.img,
+      formData.city,
+    );
     navigate("/");
   }
-
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   surname: "",
-  //   specialization: "",
-  //   serviceName: "",
-  //   img: "",
-  //   city: "",
-  // });
-
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const user = JSON.parse(localStorage.getItem("userData"));
-  //   createService(formData, user.token);
-  //   navigate("/");
-  // };
 
   return (
     <div className="pageContainer">
@@ -70,7 +68,7 @@ const CreateService = () => {
                 id="name"
                 type="text"
                 name="name"
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -80,7 +78,7 @@ const CreateService = () => {
                 id="surname"
                 type="text"
                 name="surname"
-                onChange={(e) => setSurname(e.target.value)}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -90,7 +88,7 @@ const CreateService = () => {
                 id="specialization"
                 type="text"
                 name="specialization"
-                onChange={(e) => setSpecialization(e.target.value)}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -100,7 +98,7 @@ const CreateService = () => {
                 id="img"
                 type="text"
                 name="img"
-                onChange={(e) => setImg(e.target.value)}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -110,7 +108,7 @@ const CreateService = () => {
                 id="serviceName"
                 type="text"
                 name="serviceName"
-                onChange={(e) => setServiceName(e.target.value)}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -120,7 +118,7 @@ const CreateService = () => {
                 id="city"
                 type="text"
                 name="city"
-                onChange={(e) => setCity(e.target.value)}
+                onChange={handleChange}
                 required
               />
             </div>
