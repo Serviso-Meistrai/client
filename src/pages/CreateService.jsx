@@ -2,10 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const CreateService = () => {
   const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    navigate("/");
+    return null;
+  }
 
   return (
     <div className="pageContainer">
