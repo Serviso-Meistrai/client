@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { createService } from "@/services/ads/adsServices";
 
 const CreateService = () => {
   const navigate = useNavigate();
@@ -33,7 +34,8 @@ const CreateService = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    const user = localStorage.getItem("userData");
+    createService(formData, user.token);
     navigate("/");
   };
 
