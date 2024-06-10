@@ -7,15 +7,32 @@ import CreateService from "./pages/CreateService";
 import ManageServices from "./pages/ManageServices";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
+import NavBar from "./components/NavBar";
+import { useState, useEffect } from "react";
+import { getServices } from "./services/ads/adsServices";
 import { ServiceProvider } from "./contexts/ServicesContext";
 
 function App() {
+  const [services, setServices] = useState([]);
+  const [filteredServices, setFilteredServices] = useState([]);
+
+  useEffect(() => {
+    getServices(setServices);
+  }, []);
+
   return (
     <BrowserRouter>
       <AuthProvider>
         <ServiceProvider>
+          <NavBar
+            services={services}
+            setFilteredServices={setFilteredServices}
+          />
           <Routes>
-            <Route index element={<Home />} />
+            <Route
+              index
+              element={<Home filteredServices={filteredServices} />}
+            />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route

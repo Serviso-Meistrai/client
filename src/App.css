@@ -1,0 +1,11 @@
+
+.stars, .stars_avarage{
+    display:flex;
+    gap: 2px;
+}
+.stars>li{
+    cursor: pointer;
+}
+.star_true{
+    color: rgb(255, 221, 0);
+}

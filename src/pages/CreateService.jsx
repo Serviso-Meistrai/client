@@ -2,43 +2,59 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/contexts/AuthContext";
-import { useService } from "@/contexts/ServicesContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useService } from "@/contexts/ServicesContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const CreateService = () => {
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [specialization, setSpecialization] = useState("");
+  const [serviceName, setServiceName] = useState("");
+  const [img, setImg] = useState("");
+  const [city, setCity] = useState("");
+
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const { createAd } = useService();
 
-  const {
-    createAd,
-    name,
-    surname,
-    specialization,
-    imageUrl,
-    serviceName,
-    city,
-    dispatch,
-  } = useService();
+  console.log(createAd);
 
-  if (!isAuthenticated) {
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await createAd();
+    await createAd(name, surname, specialization, serviceName, img, city);
     navigate("/");
   }
 
-  function handleChange(e) {
-    const { id, value } = e.target;
-    dispatch({
-      type: "ads/create",
-      payload: { [id]: value },
-    });
-  }
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   surname: "",
+  //   specialization: "",
+  //   serviceName: "",
+  //   img: "",
+  //   city: "",
+  // });
+
+  // const handleChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const user = JSON.parse(localStorage.getItem("userData"));
+  //   createService(formData, user.token);
+  //   navigate("/");
+  // };
 
   return (
     <div className="pageContainer">
@@ -53,19 +69,19 @@ const CreateService = () => {
               <Input
                 id="name"
                 type="text"
+                name="name"
+                onChange={(e) => setName(e.target.value)}
                 required
-                value={name}
-                onChange={handleChange}
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="Surname">Surname</Label>
+              <Label htmlFor="surname">Surname</Label>
               <Input
-                id="Surname"
+                id="surname"
                 type="text"
+                name="surname"
+                onChange={(e) => setSurname(e.target.value)}
                 required
-                value={surname}
-                onChange={handleChange}
               />
             </div>
             <div className="grid gap-2">
@@ -73,19 +89,19 @@ const CreateService = () => {
               <Input
                 id="specialization"
                 type="text"
+                name="specialization"
+                onChange={(e) => setSpecialization(e.target.value)}
                 required
-                value={specialization}
-                onChange={handleChange}
               />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="imageUrl">Image Url</Label>
               <Input
-                id="imageUrl"
+                id="img"
                 type="text"
+                name="img"
+                onChange={(e) => setImg(e.target.value)}
                 required
-                value={imageUrl}
-                onChange={handleChange}
               />
             </div>
             <div className="grid gap-2">
@@ -93,9 +109,9 @@ const CreateService = () => {
               <Input
                 id="serviceName"
                 type="text"
+                name="serviceName"
+                onChange={(e) => setServiceName(e.target.value)}
                 required
-                value={serviceName}
-                onChange={handleChange}
               />
             </div>
             <div className="grid gap-2">
@@ -103,16 +119,20 @@ const CreateService = () => {
               <Input
                 id="city"
                 type="text"
+                name="city"
+                onChange={(e) => setCity(e.target.value)}
                 required
-                value={city}
-                onChange={handleChange}
               />
             </div>
             <Button type="submit" className="w-full">
               Create Service
             </Button>
-            <Button variant="outline" className="w-full">
-              Cancel
+            <Button
+              onClick={() => navigate("/")}
+              variant="outline"
+              className="w-full"
+            >
+              Go back
             </Button>
           </form>
         </CardContent>

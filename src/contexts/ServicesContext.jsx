@@ -28,7 +28,7 @@ function reducer(action, state) {
       };
 
     default:
-      return initialState;
+      return state;
   }
 }
 
@@ -40,7 +40,7 @@ function ServiceProvider({ children }) {
     name,
     surname,
     specialization,
-    imageUrl,
+    img,
     serviceName,
     city,
   ) {
@@ -53,7 +53,7 @@ function ServiceProvider({ children }) {
           name,
           surname,
           specialization,
-          img: imageUrl,
+          img,
           serviceName,
           city,
           user: userData._id,
@@ -72,7 +72,7 @@ function ServiceProvider({ children }) {
           name,
           surname,
           specialization,
-          img: imageUrl,
+          img,
           serviceName,
           city,
         },

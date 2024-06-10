@@ -6,10 +6,13 @@ import {
   CardDescription,
   CardContent,
 } from "./ui/card";
+import Rating from "./ui/rating";
+
 
 const ServiceCard = ({ service }) => {
   return (
     <Card className="flex flex-col justify-between">
+      <Rating service={service}/>
       <CardHeader>
         <div>
           <CardTitle>{service.serviceName}</CardTitle>
@@ -17,12 +20,17 @@ const ServiceCard = ({ service }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <p>{service.name}</p>
-        <p>{service.surname}</p>
+        <p>
+          {service.name} {service.surname}
+        </p>
         <p>{service.specialization}</p>
       </CardContent>
       <CardFooter>
-        <img src={service.img} alt="Service Image" />
+        <img
+          src={service.img}
+          alt="Service Image"
+          className="w-full rounded-lg"
+        />
       </CardFooter>
     </Card>
   );
