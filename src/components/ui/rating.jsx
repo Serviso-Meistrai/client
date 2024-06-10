@@ -2,7 +2,6 @@ import { createLike, updateLike } from "@/services/likes/likesServices";
 import React, { useEffect, useState } from "react";
 
 const Rating = ({ service }) => {
-  const [tempRated, setTempRated] = useState(0);
   const [rated, setRated] = useState(0);
   const [ratedA, setRatedA] = useState(0);
   const token = JSON.parse(localStorage.getItem("userData"))?.token;
@@ -25,7 +24,6 @@ const Rating = ({ service }) => {
       setRatedA(sum);
     });
   }, []);
-
   const handleClick = (e) => {
     if (rated == 0) {
       setRated(e.target.value);
