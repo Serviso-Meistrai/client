@@ -22,7 +22,6 @@ const Rating = ({service}) => {
             sum = sum / count
             
             setRatedA(sum)
-            console.log(sum);
         })
     },[])
     const handleClick =(e)=>{
