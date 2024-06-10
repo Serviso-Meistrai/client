@@ -19,6 +19,20 @@ export const getServices = (setData) => {
     })
     .catch((err) => console.error(err));
 };
+//GET user Services
+export const getUserServices = (setData, userToken) => {
+  axios
+    .get(`http://localhost:5000/api/ads/user`, {
+      headers: {
+        Authorization: `Bearer ${userToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res) => {
+      setData(res.data);
+    })
+    .catch((err) => console.error(err));
+};
 //POST Service
 export const createService = (data, userToken, setData) => {
   axios
