@@ -26,8 +26,8 @@ const Login = () => {
   }, [navigate, isAuthenticated]);
 
   return (
-    <div className="pageContainer p-10">
-      <Card className="w-[20rem] p-10">
+    <div className="pageContainer">
+      <Card className="w-[20rem]">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
         </CardHeader>
