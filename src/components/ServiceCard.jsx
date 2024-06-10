@@ -6,6 +6,7 @@ import {
   CardDescription,
   CardContent,
 } from "./ui/card";
+import { DeleteButton } from "./DeleteButton";
 
 const ServiceCard = ({ service }) => {
   return (
@@ -14,6 +15,7 @@ const ServiceCard = ({ service }) => {
         <div>
           <CardTitle>{service.serviceName}</CardTitle>
           <CardDescription>{service.city}</CardDescription>
+          {/* {service.user === user._id && <DeleteButton id={service._id} />} */}
         </div>
       </CardHeader>
       <CardContent>

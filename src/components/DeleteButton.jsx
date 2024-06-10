@@ -9,33 +9,35 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "./ui/button";
-import { useAuth } from "@/contexts/AuthContext";
+import { deleteService } from "@/services/ads/adsServices";
 
-export const Delete = () => {
-  const { logout } = useAuth();
+export const DeleteButton = ({ id }) => {
+  const handleDelete = () => {
+    const user = localStorage.getItem("userData");
+    deleteService(id, user.token);
+  };
 
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" className="w-full">
-          Delete
-        </Button>
+        <button className="h-6 bg-transparent text-5xl font-semibold text-red-600">
+          &times;
+        </button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure you want to log out?</AlertDialogTitle>
-          <AlertDialogDescription>
-            You might miss your chance to find the best Service
-          </AlertDialogDescription>
+          <AlertDialogTitle>
+            Are you sure you want to delete this service?
+          </AlertDialogTitle>
+          <AlertDialogDescription>There is no way back!</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            onClick={logout}
+            onClick={handleDelete}
           >
-            Logout
+            Delete
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
