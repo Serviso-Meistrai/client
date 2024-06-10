@@ -6,10 +6,12 @@ import {
   CardDescription,
   CardContent,
 } from "./ui/card";
+import Rating from "./ui/rating";
 
 const ServiceCard = ({ service }) => {
   return (
     <Card className="flex flex-col justify-between">
+      <Rating service={service}/>
       <CardHeader>
         <div>
           <CardTitle>{service.serviceName}</CardTitle>

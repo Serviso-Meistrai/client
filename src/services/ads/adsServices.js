@@ -21,7 +21,7 @@ export const getServices=(setData)=>{
         .catch((err)=>console.error(err))
 }
 //POST Service
-export const CreateService=(data, userToken)=>{
+export const createService=(data, userToken)=>{
     axios
         .post(`http://localhost:5000/api/ads`, data, 
         {
