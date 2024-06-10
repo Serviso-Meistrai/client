@@ -51,11 +51,11 @@ const Rating = ({ service, setServices }) => {
             </ul>:null}
         <ul className='stars_avarage'>
             <h6>Average: </h6>
-            <li title='1 Star' className={ratedA>=1?"star_true":"star_false"}>&#9733;</li>
-            <li title='2 Stars' className={ratedA>=2?"star_true":"star_false"}>&#9733;</li>
-            <li title='3 Stars' className={ratedA>=3?"star_true":"star_false"}>&#9733;</li>
-            <li title='4 Stars' className={ratedA>=4?"star_true":"star_false"}>&#9733;</li>
-            <li title='5 Stars' className={ratedA>=5?"star_true":"star_false"}>&#9733;</li>
+            <li title='1 Star' className={ratedA>=0.5?"star_true":"star_false"}>&#9733;</li>
+            <li title='2 Stars' className={ratedA>=1.5?"star_true":"star_false"}>&#9733;</li>
+            <li title='3 Stars' className={ratedA>=2.5?"star_true":"star_false"}>&#9733;</li>
+            <li title='4 Stars' className={ratedA>=3.5?"star_true":"star_false"}>&#9733;</li>
+            <li title='5 Stars' className={ratedA>=4.5?"star_true":"star_false"}>&#9733;</li>
             <h6>({counter})</h6>
         </ul>
     </div>
