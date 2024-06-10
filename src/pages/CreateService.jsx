@@ -20,8 +20,9 @@ const CreateService = () => {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
-    imageUrl: "",
+    specialization: "",
     serviceName: "",
+    img: "",
     city: "",
   });
 
@@ -34,7 +35,7 @@ const CreateService = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = localStorage.getItem("userData");
+    const user = JSON.parse(localStorage.getItem("userData"));
     createService(formData, user.token);
     navigate("/");
   };
@@ -80,9 +81,9 @@ const CreateService = () => {
             <div className="grid gap-2">
               <Label htmlFor="imageUrl">Image Url</Label>
               <Input
-                id="imageUrl"
+                id="img"
                 type="text"
-                name="imageUrl"
+                name="img"
                 onChange={handleChange}
                 required
               />
