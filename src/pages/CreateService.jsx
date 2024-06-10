@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { createService } from "@/services/ads/adsServices";
 
-const CreateService = () => {
+const CreateService = ({ setServices }) => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
@@ -36,7 +36,7 @@ const CreateService = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = JSON.parse(localStorage.getItem("userData"));
-    createService(formData, user.token);
+    createService(formData, user.token, setServices);
     navigate("/");
   };
 

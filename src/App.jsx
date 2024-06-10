@@ -24,14 +24,14 @@ function App() {
       <AuthProvider>
         <NavBar services={services} setFilteredServices={setFilteredServices} />
         <Routes>
-          <Route index element={<Home filteredServices={filteredServices} />} />
+          <Route index element={<Home filteredServices={filteredServices} setServices={setServices}/>} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route
             path="create"
             element={
               <ProtectedRoute>
-                <CreateService />
+                <CreateService  setServices={setServices}/>
               </ProtectedRoute>
             }
           />

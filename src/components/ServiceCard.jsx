@@ -9,10 +9,10 @@ import {
 import Rating from "./ui/rating";
 
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, setServices }) => {
   return (
     <Card className="flex flex-col justify-between">
-      <Rating service={service}/>
+      <Rating service={service} setServices={setServices}/>
       <CardHeader>
         <div>
           <CardTitle>{service.serviceName}</CardTitle>
