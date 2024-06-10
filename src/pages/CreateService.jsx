@@ -59,7 +59,7 @@ const CreateService = () => {
               variant="outline"
               className="w-full"
             >
-              Cancel
+              Go back
             </Button>
           </div>
         </CardContent>

@@ -31,7 +31,7 @@ const NavBar = ({ services, setFilteredServices }) => {
   }, [searchInput, services]);
 
   return (
-    <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+    <div className="flex w-full items-center gap-4 pb-6 md:ml-auto md:gap-2 lg:gap-4">
       <ThemeSwitch />
       {isAuthenticated && <p>Hello, {username}</p>}
       <form className="ml-auto flex-1 sm:flex-initial">
