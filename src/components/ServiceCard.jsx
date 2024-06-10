@@ -9,12 +9,13 @@ import {
 } from "./ui/card";
 import Rating from "./ui/rating";
 
-const ServiceCard = ({ service }) => {
+
+const ServiceCard = ({ service, setServices }) => {
   const user = JSON.parse(localStorage.getItem("userData"));
 
   return (
     <Card className="flex flex-col justify-between">
-      <Rating service={service} />
+      <Rating service={service}  setServices={setServices} />
       <DeleteButton id={service._id} />
       <CardHeader>
         <div>

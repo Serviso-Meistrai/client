@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route
               index
-              element={<Home filteredServices={filteredServices} />}
+              element={<Home filteredServices={filteredServices} setServices={setServices}/>}
             />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

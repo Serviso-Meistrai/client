@@ -1,3 +1,4 @@
+import { createService } from "@/services/ads/adsServices";
 import axios from "axios";
 import { createContext, useContext, useReducer } from "react";
 
@@ -46,25 +47,15 @@ function ServiceProvider({ children }) {
   ) {
     const userData = JSON.parse(localStorage.getItem("userData"));
 
-    try {
-      await axios.post(
-        BASE_URL,
-        {
-          name,
-          surname,
-          specialization,
-          img,
-          serviceName,
-          city,
-          user: userData._id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${userData.token}`,
-            "Content-Type": "application/json",
-          },
-        },
-      );
+    createService({ 
+      name:name,
+       surname:surname, 
+       specialization:specialization, 
+       img:img, 
+       serviceName:serviceName, 
+       city:city,
+       user:userData._id
+      }, userData.token)
 
       dispatch({
         type: "ads/create",
@@ -77,10 +68,9 @@ function ServiceProvider({ children }) {
           city,
         },
       });
-    } catch (err) {
-      console.error(err);
-    }
+
   }
+
 
   return (
     <ServicesContext.Provider

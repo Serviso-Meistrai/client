@@ -42,11 +42,11 @@ export const createService = (data, userToken) => {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => alert("Created"))
+    .then((res) => console.log(res))
     .catch((err) => console.error(err));
 };
 //Update Service
-export const updateService = (data, adId, userToken) => {
+export const updateService = (data, adId, userToken, setData) => {
   axios
     .put(`http://localhost:5000/api/ads/${adId}`, data, {
       headers: {
@@ -54,7 +54,7 @@ export const updateService = (data, adId, userToken) => {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => alert("Updated"))
+    .then((res) => getServices(setData))
     .catch((err) => console.error(err));
 };
 // Delete Service
@@ -66,6 +66,6 @@ export const deleteService = (adId, userToken) => {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => alert("Deleted"))
+    .then((res) => getServices(setData))
     .catch((err) => console.error(err));
 };

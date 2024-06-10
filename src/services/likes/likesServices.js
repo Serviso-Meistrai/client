@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getServices } from "../ads/adsServices";
 
 // data pvz.:
 // data = {
@@ -7,8 +8,7 @@ import axios from "axios";
 // }
 
 // Post Likes
-export const createLike = (data, userToken) => {
-    console.log(data);
+export const createLike = (data, userToken, setData) => {
     axios
         .post(`http://localhost:5000/api/likes`, data, {
             headers:{
@@ -16,13 +16,13 @@ export const createLike = (data, userToken) => {
                 'Content-Type': 'application/json',
             }
         })
-        .then((res)=>alert("liked"))
+        .then((res)=>getServices(setData))
         .catch((err)=>console.error(err))
 }
 
 // Update Like
 
-export const updateLike = (data, userToken, likeId)=>{
+export const updateLike = (data, userToken, likeId, setData)=>{
     axios
     .put(`http://localhost:5000/api/likes/${likeId}`, data, {
     headers:{
@@ -30,6 +30,6 @@ export const updateLike = (data, userToken, likeId)=>{
         'Content-Type': 'application/json',
     }
     })
-    .then((res)=>alert("like updated"))
+    .then((res)=>getServices(setData))
     .catch((err)=>console.error(err))
 }

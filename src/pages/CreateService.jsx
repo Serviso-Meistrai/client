@@ -8,12 +8,6 @@ import { useService } from "@/contexts/ServicesContext";
 import { useAuth } from "@/contexts/AuthContext";
 
 const CreateService = () => {
-  // const [name, setName] = useState("");
-  // const [surname, setSurname] = useState("");
-  // const [specialization, setSpecialization] = useState("");
-  // const [serviceName, setServiceName] = useState("");
-  // const [img, setImg] = useState("");
-  // const [city, setCity] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
