@@ -13,7 +13,7 @@ import { deleteService } from "@/services/ads/adsServices";
 
 export const DeleteButton = ({ id }) => {
   const handleDelete = () => {
-    const user = localStorage.getItem("userData");
+    const user = JSON.parse(localStorage.getItem("userData"));
     deleteService(id, user.token);
   };
 

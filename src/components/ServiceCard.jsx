@@ -9,13 +9,14 @@ import {
 import { DeleteButton } from "./DeleteButton";
 
 const ServiceCard = ({ service }) => {
+  const user = JSON.parse(localStorage.getItem("userData"));
   return (
     <Card className="flex flex-col justify-between">
       <CardHeader>
         <div>
           <CardTitle>{service.serviceName}</CardTitle>
           <CardDescription>{service.city}</CardDescription>
-          {/* {service.user === user._id && <DeleteButton id={service._id} />} */}
+          {service.user === user._id && <DeleteButton id={service._id} />}
         </div>
       </CardHeader>
       <CardContent>
