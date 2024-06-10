@@ -2,20 +2,13 @@ import NavBar from "@/components/NavBar";
 import ServiceCard from "@/components/ServiceCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getServices } from "@/services/ads/adsServices";
 
 const Home = () => {
   const [filteredServices, setFilteredServices] = useState([]);
-
+  
   useEffect(() => {
-    const getServices = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/ads");
-        setFilteredServices(res.data);
-      } catch (error) {
-        console.error("Error fetching services:", error);
-      }
-    };
-    getServices();
+    getServices(setFilteredServices)
   }, []);
 
   return (
