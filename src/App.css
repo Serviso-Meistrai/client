@@ -1,6 +1,7 @@
 
-.stars{
+.stars, .stars_avarage{
     display:flex;
+    gap: 2px;
 }
 .stars>li{
     cursor: pointer;
