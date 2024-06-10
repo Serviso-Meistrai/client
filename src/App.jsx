@@ -8,13 +8,31 @@ import ManageServices from "./pages/ManageServices";
 import React from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
+import NavBar from "./components/NavBar";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  const [services, setServices] = useState([]);
+  const [filteredServices, setFilteredServices] = useState([]);
+
+  useEffect(() => {
+    const getServices = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/ads");
+        setServices(res.data);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    };
+    getServices();
+  }, []);
   return (
     <BrowserRouter>
       <AuthProvider>
+        <NavBar services={services} setFilteredServices={setFilteredServices} />
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home filteredServices={filteredServices} />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route
