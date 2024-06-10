@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import NavBar from "./components/NavBar";
 import { useState, useEffect } from "react";
 import { getServices } from "./services/ads/adsServices";
+import { ServiceProvider } from "./contexts/ServicesContext";
 
 function App() {
   const [services, setServices] = useState([]);
@@ -22,29 +23,37 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <NavBar services={services} setFilteredServices={setFilteredServices} />
-        <Routes>
-          <Route index element={<Home filteredServices={filteredServices} />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route
-            path="create"
-            element={
-              <ProtectedRoute>
-                <CreateService />
-              </ProtectedRoute>
-            }
+        <ServiceProvider>
+          <NavBar
+            services={services}
+            setFilteredServices={setFilteredServices}
           />
-          <Route
-            path="manage"
-            element={
-              <ProtectedRoute>
-                <ManageServices />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<p>There's nothing here: 404!</p>} />
-        </Routes>
+          <Routes>
+            <Route
+              index
+              element={<Home filteredServices={filteredServices} />}
+            />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route
+              path="create"
+              element={
+                <ProtectedRoute>
+                  <CreateService />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="manage"
+              element={
+                <ProtectedRoute>
+                  <ManageServices />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<p>There's nothing here: 404!</p>} />
+          </Routes>
+        </ServiceProvider>
       </AuthProvider>
     </BrowserRouter>
   );

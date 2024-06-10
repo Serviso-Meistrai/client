@@ -2,20 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { createService } from "@/services/ads/adsServices";
+import { useService } from "@/contexts/ServicesContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 const CreateService = () => {
-  const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated]);
+  // const [name, setName] = useState("");
+  // const [surname, setSurname] = useState("");
+  // const [specialization, setSpecialization] = useState("");
+  // const [serviceName, setServiceName] = useState("");
+  // const [img, setImg] = useState("");
+  // const [city, setCity] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -33,12 +31,28 @@ const CreateService = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  const { createAd } = useService();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem("userData"));
-    createService(formData, user.token);
+    await createAd(
+      formData.name,
+      formData.surname,
+      formData.specialization,
+      formData.serviceName,
+      formData.img,
+      formData.city,
+    );
     navigate("/");
-  };
+  }
 
   return (
     <div className="pageContainer">
@@ -94,7 +108,7 @@ const CreateService = () => {
                 id="serviceName"
                 type="text"
                 name="serviceName"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -104,7 +118,7 @@ const CreateService = () => {
                 id="city"
                 type="text"
                 name="city"
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
                 required
               />
             </div>
