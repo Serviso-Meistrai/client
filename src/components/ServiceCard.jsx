@@ -1,4 +1,3 @@
-import Rating from "@/components/ui/rating";
 import {
   Card,
   CardHeader,
@@ -7,6 +6,7 @@ import {
   CardDescription,
   CardContent,
 } from "./ui/card";
+import Rating from "./ui/rating";
 
 
 const ServiceCard = ({ service }) => {
