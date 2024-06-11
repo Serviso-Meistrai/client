@@ -9,14 +9,17 @@ import {
 } from "./ui/card";
 import Rating from "./ui/rating";
 
-
 const ServiceCard = ({ service, setServices }) => {
-  const user = JSON.parse(localStorage.getItem("userData"));
+  const userData = localStorage.getItem("userData");
+  const user = userData ? JSON.parse(userData) : null;
 
   return (
     <Card className="flex flex-col justify-between">
-      <Rating service={service}  setServices={setServices} />
-      <DeleteButton id={service._id} />
+      <div className="flex justify-between p-3">
+        <Rating service={service} setServices={setServices} />
+        {user._id === service.user._id && <DeleteButton id={service._id} />}
+      </div>
+
       <CardHeader>
         <div>
           <CardTitle>{service.serviceName}</CardTitle>
