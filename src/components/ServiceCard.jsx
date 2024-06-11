@@ -12,8 +12,6 @@ import Rating from "./ui/rating";
 const ServiceCard = ({ service, setServices }) => {
   const userData = localStorage.getItem("userData");
   const user = userData ? JSON.parse(userData) : null;
-  console.log(user._id);
-  console.log(service.user._id);
 
   return (
     <Card className="flex flex-col justify-between">
