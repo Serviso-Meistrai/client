@@ -17,7 +17,7 @@ const ServiceCard = ({ service, setServices }) => {
     <Card className="flex flex-col justify-between">
       <div className="flex justify-between p-3">
         <Rating service={service} setServices={setServices} />
-        {user._id === service.user._id && <DeleteButton id={service._id} />}
+        {user?._id === service.user._id && <DeleteButton id={service._id} />}
       </div>
 
       <CardHeader>
