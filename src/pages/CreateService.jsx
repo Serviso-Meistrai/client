@@ -13,8 +13,8 @@ const CreateService = () => {
     name: "",
     surname: "",
     specialization: "",
-    serviceName: "",
     img: "",
+    serviceName: "",
     city: "",
   });
 
@@ -41,8 +41,8 @@ const CreateService = () => {
       formData.name,
       formData.surname,
       formData.specialization,
-      formData.serviceName,
       formData.img,
+      formData.serviceName,
       formData.city,
     );
     navigate("/");
