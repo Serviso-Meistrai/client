@@ -8,7 +8,6 @@ import { useService } from "@/contexts/ServicesContext";
 import { useAuth } from "@/contexts/AuthContext";
 
 const CreateService = () => {
-
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -26,14 +25,7 @@ const CreateService = () => {
   };
 
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
   const { createAd } = useService();
-
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();

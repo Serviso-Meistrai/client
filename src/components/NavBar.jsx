@@ -71,7 +71,7 @@ const NavBar = ({ services, setFilteredServices }) => {
                 onClick={() => navigate("/manage")}
                 className="justify-center"
               >
-                Manage My Services
+                Manage Services
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <LogoutButton />
