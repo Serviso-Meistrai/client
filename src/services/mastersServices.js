@@ -34,7 +34,7 @@ export const getUserMasters = (setData, userToken) => {
     .catch((err) => console.error(err));
 };
 //POST Master
-export const createMaster = (data, userToken) => {
+export const saveMaster = (data, userToken) => {
   axios
     .post(`http://localhost:5000/api/ads`, data, {
       headers: {

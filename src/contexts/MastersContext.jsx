@@ -1,4 +1,4 @@
-import { createMaster } from "@/services/mastersServices";
+import { saveMaster } from "@/services/mastersServices";
 import { createContext, useContext, useReducer } from "react";
 
 const MastersContext = createContext();
@@ -46,7 +46,7 @@ function MastersProvider({ children }) {
   ) {
     const userData = JSON.parse(localStorage.getItem("userData"));
 
-    createMaster(
+    saveMaster(
       {
         name: name,
         surname: surname,
