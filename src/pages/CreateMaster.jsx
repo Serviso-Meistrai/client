@@ -3,11 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useService } from "@/contexts/ServicesContext";
-import { useAuth } from "@/contexts/AuthContext";
+import { useState } from "react";
+import { useMaster } from "@/contexts/MastersContext";
 
-const CreateService = () => {
+const CreateMaster = () => {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -25,11 +24,11 @@ const CreateService = () => {
   };
 
   const navigate = useNavigate();
-  const { createAd } = useService();
+  const { createMaster } = useMaster();
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await createAd(
+    await createMaster(
       formData.name,
       formData.surname,
       formData.specialization,
@@ -44,7 +43,7 @@ const CreateService = () => {
     <div className="pageContainer">
       <Card className="w-[22rem]">
         <CardHeader>
-          <CardTitle className="text-2xl">Create New Service</CardTitle>
+          <CardTitle className="text-2xl">Create New Master</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="grid gap-4" onSubmit={handleSubmit}>
@@ -109,7 +108,7 @@ const CreateService = () => {
               />
             </div>
             <Button type="submit" className="w-full">
-              Create Service
+              Create Master
             </Button>
             <Button
               onClick={() => navigate("/")}
@@ -125,4 +124,4 @@ const CreateService = () => {
   );
 };
 
-export default CreateService;
+export default CreateMaster;

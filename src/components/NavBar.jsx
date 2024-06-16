@@ -16,19 +16,19 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeSwitch from "./ThemeSwitch";
 
-const NavBar = ({ services, setFilteredServices }) => {
+const NavBar = ({ masters, setFilteredMasters }) => {
   const navigate = useNavigate();
   const { isAuthenticated, username } = useAuth();
 
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    setFilteredServices(
-      services.filter((service) =>
-        service.serviceName.toLowerCase().includes(searchInput.toLowerCase()),
+    setFilteredMasters(
+      masters.filter((master) =>
+        master.serviceName.toLowerCase().includes(searchInput.toLowerCase()),
       ),
     );
-  }, [searchInput, services]);
+  }, [searchInput, masters]);
 
   return (
     <div className="flex w-full items-center gap-4 pb-6 md:ml-auto md:gap-2 lg:gap-4">
@@ -39,7 +39,7 @@ const NavBar = ({ services, setFilteredServices }) => {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search services..."
+            placeholder="Search masters..."
             className="pl-8 sm:w-[200px] md:w-[200px] lg:w-[300px]"
             onChange={(e) => {
               setSearchInput(e.target.value);
@@ -62,16 +62,22 @@ const NavBar = ({ services, setFilteredServices }) => {
           {isAuthenticated ? (
             <>
               <DropdownMenuItem
-                onClick={() => navigate("/create")}
-                className="justify-center"
-              >
-                Create New Service
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => navigate("/manage")}
+                onClick={() => navigate("/manageServices")}
                 className="justify-center"
               >
                 Manage Services
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate("/create")}
+                className="justify-center"
+              >
+                Create New Master
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate("/manageMasters")}
+                className="justify-center"
+              >
+                Manage Masters
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <LogoutButton />

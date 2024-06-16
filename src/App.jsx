@@ -3,35 +3,38 @@ import "./App.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import CreateService from "./pages/CreateService";
+import CreateMaster from "./pages/CreateMaster";
+import ManageMasters from "./pages/ManageMasters";
 import ManageServices from "./pages/ManageServices";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import NavBar from "./components/NavBar";
 import { useState, useEffect } from "react";
-import { getServices } from "./services/ads/adsServices";
-import { ServiceProvider } from "./contexts/ServicesContext";
+import { getMasters } from "./services/mastersServices";
+import { MastersProvider } from "./contexts/MastersContext";
 
 function App() {
-  const [services, setServices] = useState([]);
-  const [filteredServices, setFilteredServices] = useState([]);
+  const [masters, setMasters] = useState([]);
+  const [filteredMasters, setFilteredMasters] = useState([]);
 
   useEffect(() => {
-    getServices(setServices);
+    getMasters(setMasters);
   }, []);
 
   return (
     <BrowserRouter>
       <AuthProvider>
-        <ServiceProvider>
-          <NavBar
-            services={services}
-            setFilteredServices={setFilteredServices}
-          />
+        <MastersProvider>
+          <NavBar masters={masters} setFilteredMasters={setFilteredMasters} />
           <Routes>
             <Route
               index
-              element={<Home filteredServices={filteredServices} setServices={setServices}/>}
+              element={
+                <Home
+                  filteredMasters={filteredMasters}
+                  setMasters={setMasters}
+                />
+              }
             />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
@@ -39,12 +42,20 @@ function App() {
               path="create"
               element={
                 <ProtectedRoute>
-                  <CreateService />
+                  <CreateMaster />
                 </ProtectedRoute>
               }
             />
             <Route
-              path="manage"
+              path="manageMasters"
+              element={
+                <ProtectedRoute>
+                  <ManageMasters />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="ManageServices"
               element={
                 <ProtectedRoute>
                   <ManageServices />
@@ -53,7 +64,7 @@ function App() {
             />
             <Route path="*" element={<p>There's nothing here: 404!</p>} />
           </Routes>
-        </ServiceProvider>
+        </MastersProvider>
       </AuthProvider>
     </BrowserRouter>
   );
