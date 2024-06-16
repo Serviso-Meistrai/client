@@ -58,7 +58,7 @@ export const updateMaster = (data, adId, userToken, setData) => {
     .catch((err) => console.error(err));
 };
 // Delete Master
-export const deleteMaster = (adId, userToken) => {
+export const deleteMaster = (adId, userToken, setData) => {
   axios
     .delete(`http://localhost:5000/api/ads/${adId}`, {
       headers: {
