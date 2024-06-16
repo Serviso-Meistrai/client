@@ -79,13 +79,19 @@ const NavBar = ({ masters, setFilteredMasters }) => {
               >
                 Manage Masters
               </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => navigate("/createService")}
+                className="justify-center"
+              >
+                Create Service
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <LogoutButton />
             </>
           ) : (
             <>
               <DropdownMenuItem
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
                 className="justify-center"
               >
                 Login
