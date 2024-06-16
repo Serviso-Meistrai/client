@@ -9,12 +9,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { deleteService } from "@/services/ads/adsServices";
+import { deleteMaster } from "@/services/mastersServices";
 
 export const DeleteButton = ({ id }) => {
   const handleDelete = () => {
     const user = JSON.parse(localStorage.getItem("userData"));
-    deleteService(id, user.token);
+    deleteMaster(id, user.token);
   };
 
   return (
@@ -27,7 +27,7 @@ export const DeleteButton = ({ id }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Are you sure you want to delete this service?
+            Are you sure you want to delete this master?
           </AlertDialogTitle>
           <AlertDialogDescription>There is no way back!</AlertDialogDescription>
         </AlertDialogHeader>

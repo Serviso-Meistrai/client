@@ -1,8 +1,7 @@
-import { createService } from "@/services/ads/adsServices";
-import axios from "axios";
+import { createMaster } from "@/services/mastersServices";
 import { createContext, useContext, useReducer } from "react";
 
-const ServicesContext = createContext();
+const MastersContext = createContext();
 
 const BASE_URL = "http://localhost:5000/api/ads";
 
@@ -33,11 +32,11 @@ function reducer(action, state) {
   }
 }
 
-function ServiceProvider({ children }) {
+function MastersProvider({ children }) {
   const [{ name, surname, specialization, img, serviceName, city }, dispatch] =
     useReducer(reducer, initialState);
 
-  async function createAd(
+  async function createMaster(
     name,
     surname,
     specialization,
@@ -47,33 +46,34 @@ function ServiceProvider({ children }) {
   ) {
     const userData = JSON.parse(localStorage.getItem("userData"));
 
-    createService({ 
-      name:name,
-       surname:surname, 
-       specialization:specialization, 
-       img:img, 
-       serviceName:serviceName, 
-       city:city,
-       user:userData._id
-      }, userData.token)
+    createMaster(
+      {
+        name: name,
+        surname: surname,
+        specialization: specialization,
+        img: img,
+        serviceName: serviceName,
+        city: city,
+        user: userData._id,
+      },
+      userData.token,
+    );
 
-      dispatch({
-        type: "ads/create",
-        payload: {
-          name,
-          surname,
-          specialization,
-          img,
-          serviceName,
-          city,
-        },
-      });
-
+    dispatch({
+      type: "ads/create",
+      payload: {
+        name,
+        surname,
+        specialization,
+        img,
+        serviceName,
+        city,
+      },
+    });
   }
 
-
   return (
-    <ServicesContext.Provider
+    <MastersContext.Provider
       value={{
         name,
         surname,
@@ -81,20 +81,20 @@ function ServiceProvider({ children }) {
         img,
         serviceName,
         city,
-        createAd,
+        createMaster,
         dispatch,
       }}
     >
       {children}
-    </ServicesContext.Provider>
+    </MastersContext.Provider>
   );
 }
 
-function useService() {
-  const context = useContext(ServicesContext);
+function useMaster() {
+  const context = useContext(MastersContext);
   if (context === undefined)
-    throw new Error("ServiceContext was used outside ServicesProvider");
+    throw new Error("MastersContext was used outside MastersProvider");
   return context;
 }
 
-export { ServiceProvider, useService };
+export { MastersProvider, useMaster };
