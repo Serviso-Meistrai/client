@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const API_URL = "http://localhost:5000/api/ads";
+
 // data pvz.:
 // data = {
 //     name: "...",
@@ -13,7 +15,7 @@ import axios from "axios";
 //GET Services
 export const getServices = (setData) => {
   axios
-    .get(`http://localhost:5000/api/ads`)
+    .get(API_URL)
     .then((res) => {
       setData(res.data);
     })
@@ -22,7 +24,7 @@ export const getServices = (setData) => {
 //GET user Services
 export const getUserServices = (setData, userToken) => {
   axios
-    .get(`http://localhost:5000/api/ads/user`, {
+    .get(`${API_URL}/user`, {
       headers: {
         Authorization: `Bearer ${userToken}`,
         "Content-Type": "application/json",
@@ -36,7 +38,7 @@ export const getUserServices = (setData, userToken) => {
 //POST Service
 export const createService = (data, userToken) => {
   axios
-    .post(`http://localhost:5000/api/ads`, data, {
+    .post(API_URL, data, {
       headers: {
         Authorization: `Bearer ${userToken}`,
         "Content-Type": "application/json",
@@ -48,7 +50,7 @@ export const createService = (data, userToken) => {
 //Update Service
 export const updateService = (data, adId, userToken) => {
   axios
-    .put(`http://localhost:5000/api/ads/${adId}`, data, {
+    .put(`${API_URL}/${adId}`, data, {
       headers: {
         Authorization: `Bearer ${userToken}`,
         "Content-Type": "application/json",
@@ -60,7 +62,7 @@ export const updateService = (data, adId, userToken) => {
 // Delete Service
 export const deleteService = (adId, userToken) => {
   axios
-    .delete(`http://localhost:5000/api/ads/${adId}`, {
+    .delete(`${API_URL}/${adId}`, {
       headers: {
         Authorization: `Bearer ${userToken}`,
         "Content-Type": "application/json",

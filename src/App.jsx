@@ -30,10 +30,10 @@ function App() {
           />
           <Routes>
             <Route
-              index
+              path="home"
               element={<Home filteredServices={filteredServices} />}
             />
-            <Route path="login" element={<Login />} />
+            <Route index element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route
               path="create"

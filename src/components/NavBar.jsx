@@ -79,7 +79,7 @@ const NavBar = ({ services, setFilteredServices }) => {
           ) : (
             <>
               <DropdownMenuItem
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
                 className="justify-center"
               >
                 Login

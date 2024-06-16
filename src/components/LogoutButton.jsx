@@ -11,9 +11,16 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const LogoutButton = () => {
   const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  function logoutUser() {
+    logout();
+    navigate("/");
+  }
 
   return (
     <AlertDialog>
@@ -33,7 +40,7 @@ export const LogoutButton = () => {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            onClick={logout}
+            onClick={logoutUser}
           >
             Logout
           </AlertDialogAction>
