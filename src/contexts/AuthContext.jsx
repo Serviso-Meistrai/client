@@ -10,6 +10,7 @@ const initialState = {
   email: "",
   password: "",
   repeatPassword: "",
+  role: "",
   isAuthenticated: false,
 };
 
@@ -22,6 +23,7 @@ function reducer(state, action) {
         email: action.payload.email,
         password: action.payload.password,
         repeatPassword: action.payload.repeatPassword,
+        role: "simple",
         isAuthenticated: true,
       };
     case "login":
@@ -29,6 +31,7 @@ function reducer(state, action) {
         ...state,
         username: action.payload.username,
         email: action.payload.email,
+        role: action.payload.role,
         isAuthenticated: true,
       };
     case "logout":
@@ -38,6 +41,7 @@ function reducer(state, action) {
         email: "",
         password: "",
         repeatPassword: "",
+        role: "",
         isAuthenticated: false,
       };
     default:
@@ -47,19 +51,19 @@ function reducer(state, action) {
 
 function AuthProvider({ children }) {
   const [
-    { username, email, password, repeatPassword, isAuthenticated },
+    { username, email, password, repeatPassword, role, isAuthenticated },
     dispatch,
   ] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const storeUserData = localStorage.getItem("userData");
     if (storeUserData) {
-      const { username, email } = JSON.parse(storeUserData);
+      const { username, email, role } = JSON.parse(storeUserData);
       dispatch({
         type: "login",
-        payload: { username, email },
+        payload: { username, email, role },
       });
-      console.log(username);
+      console.log(username, email, role);
     }
   }, []);
 
@@ -96,19 +100,20 @@ function AuthProvider({ children }) {
         password,
       });
 
-      const { token, username, _id } = res.data;
+      const { token, username, _id, role } = res.data;
 
       dispatch({
         type: "login",
         payload: {
           username,
           email,
+          role,
         },
       });
 
       localStorage.setItem(
         "userData",
-        JSON.stringify({ token, username, _id }),
+        JSON.stringify({ token, username, _id, role }),
       );
       console.log(res);
     } catch (err) {
@@ -128,6 +133,7 @@ function AuthProvider({ children }) {
         email,
         password,
         repeatPassword,
+        role,
         isAuthenticated,
         register,
         login,

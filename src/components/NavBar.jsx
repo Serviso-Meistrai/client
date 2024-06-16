@@ -25,9 +25,9 @@ const NavBar = ({ masters, setFilteredMasters }) => {
   useEffect(() => {
     console.log(masters);
     setFilteredMasters(masters);
-    // masters.filter((master) =>
-    //   master.serviceName.toLowerCase().includes(searchInput.toLowerCase()),
-    // ),
+    masters.filter((master) =>
+      master.serviceName.name.toLowerCase().includes(searchInput.toLowerCase()),
+    );
   }, [searchInput, masters]);
 
   return (

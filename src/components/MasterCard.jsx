@@ -17,7 +17,7 @@ const MasterCard = ({ master, setMasters, isAdmin }) => {
       </div>
       <CardHeader>
         <div>
-          <CardTitle>{master.serviceName}</CardTitle>
+          <CardTitle>{master.serviceName.name}</CardTitle>
           <CardDescription>{master.city}</CardDescription>
         </div>
       </CardHeader>
