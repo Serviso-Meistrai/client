@@ -32,7 +32,6 @@ function ServiceProvider({ children }) {
     async function fetchServices() {
       const setData = (services) => {
         dispatch({ type: "service/set", payload: services });
-        console.log(services);
       };
       await getServices(setData);
     }

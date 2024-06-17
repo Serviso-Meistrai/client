@@ -45,13 +45,37 @@ function reducer(action, state) {
 }
 
 function MastersProvider({ children }) {
-  const [{ name, surname, specialization, img, serviceName, city }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    {
+      name,
+      surname,
+      specialization,
+      img,
+      serviceName,
+      city,
+      masters,
+      filteredMasters,
+    },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
-  // useEffect(() => {
-  //   const masters = getMasters();
-  //   console.log(masters);
-  // }, []);
+  useEffect(() => {
+    async function fetchMasters() {
+      const mastersData = (master) => {
+        dispatch({ type: "masters/set", payload: master });
+        dispatch({ type: "masters/filtered", payload: filteredMasters });
+      };
+      await getMasters(mastersData);
+    }
+    fetchMasters();
+  }, [filteredMasters]);
+
+  function filterMasters(searchInput) {
+    const filtered = masters.filter((master) =>
+      master.serviceName.name.toLowerCase().includes(searchInput.toLowerCase()),
+    );
+    dispatch({ type: "masters/filtered", payload: filtered });
+  }
 
   async function createMaster(
     name,
@@ -99,6 +123,9 @@ function MastersProvider({ children }) {
         serviceName,
         city,
         createMaster,
+        masters,
+        filteredMasters,
+        filterMasters,
         dispatch,
       }}
     >
