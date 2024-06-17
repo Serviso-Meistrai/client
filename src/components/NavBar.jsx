@@ -21,7 +21,6 @@ const NavBar = ({ masters, setFilteredMasters }) => {
   const navigate = useNavigate();
   const { isAuthenticated, username, role } = useAuth();
   const { services } = useService();
-  console.log(services);
 
   const [searchInput, setSearchInput] = useState("");
 

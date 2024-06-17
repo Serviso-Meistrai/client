@@ -5,14 +5,28 @@ import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useMaster } from "@/contexts/MastersContext";
+import { useService } from "@/contexts/ServiceContext";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const CreateMaster = () => {
+  const navigate = useNavigate();
+  const { services } = useService();
+  const { createMaster } = useMaster();
+
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
     specialization: "",
     img: "",
-    serviceName: "",
+    serviceName: services[0].name,
     city: "",
   });
 
@@ -23,11 +37,16 @@ const CreateMaster = () => {
     });
   };
 
-  const navigate = useNavigate();
-  const { createMaster } = useMaster();
+  const handleSelect = (value) => {
+    setFormData({
+      ...formData,
+      serviceName: value,
+    });
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(formData);
     await createMaster(
       formData.name,
       formData.surname,
@@ -68,6 +87,29 @@ const CreateMaster = () => {
               />
             </div>
             <div className="grid gap-2">
+              <Label htmlFor="serviceName">Service</Label>
+              <Select
+                onValueChange={(value) => handleSelect(value)}
+                name="serviceName"
+                required
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a Service" />
+                </SelectTrigger>
+                <SelectContent className="w-[18.8rem] pr-7 text-center">
+                  {services?.map((service) => (
+                    <SelectItem
+                      key={service._id}
+                      value={service.name}
+                      className="pl-28"
+                    >
+                      {service.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-2">
               <Label htmlFor="specialization">Specialization</Label>
               <Input
                 id="specialization"
@@ -83,16 +125,6 @@ const CreateMaster = () => {
                 id="img"
                 type="text"
                 name="img"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="serviceName">Service Name</Label>
-              <Input
-                id="serviceName"
-                type="text"
-                name="serviceName"
                 onChange={handleChange}
                 required
               />
