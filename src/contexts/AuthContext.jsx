@@ -63,7 +63,7 @@ function AuthProvider({ children }) {
         type: "login",
         payload: { username, email, role },
       });
-      console.log(username, email, role);
+      console.log(username, role);
     }
   }, []);
 
