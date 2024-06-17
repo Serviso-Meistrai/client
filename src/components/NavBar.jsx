@@ -18,7 +18,7 @@ import ThemeSwitch from "./ThemeSwitch";
 
 const NavBar = ({ masters, setFilteredMasters }) => {
   const navigate = useNavigate();
-  const { isAuthenticated, username } = useAuth();
+  const { isAuthenticated, username, role } = useAuth();
 
   const [searchInput, setSearchInput] = useState("");
 
@@ -31,22 +31,26 @@ const NavBar = ({ masters, setFilteredMasters }) => {
   }, [searchInput, masters]);
 
   return (
-    <div className="flex w-full items-center gap-4 pb-6 md:ml-auto md:gap-2 lg:gap-4">
+    <div className="flex w-full items-center justify-between gap-4 pb-6 md:ml-auto md:gap-2 lg:gap-4">
       <ThemeSwitch />
-      {isAuthenticated && <p>Hello, {username}</p>}
-      <form className="ml-auto flex-1 sm:flex-initial">
-        <div className="relative">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search masters..."
-            className="pl-8 sm:w-[200px] md:w-[200px] lg:w-[300px]"
-            onChange={(e) => {
-              setSearchInput(e.target.value);
-            }}
-          />
-        </div>
-      </form>
+      {isAuthenticated && (
+        <>
+          <p>Hello, {username}</p>
+          <form className="ml-auto flex-1 sm:flex-initial">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search masters..."
+                className="pl-8 sm:w-[200px] md:w-[200px] lg:w-[300px]"
+                onChange={(e) => {
+                  setSearchInput(e.target.value);
+                }}
+              />
+            </div>
+          </form>
+        </>
+      )}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon" className="rounded-full">
@@ -61,30 +65,34 @@ const NavBar = ({ masters, setFilteredMasters }) => {
           <DropdownMenuSeparator />
           {isAuthenticated ? (
             <>
-              <DropdownMenuItem
-                onClick={() => navigate("/manageServices")}
-                className="justify-center"
-              >
-                Manage Services
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => navigate("/create")}
-                className="justify-center"
-              >
-                Create New Master
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => navigate("/manageMasters")}
-                className="justify-center"
-              >
-                Manage Masters
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => navigate("/createService")}
-                className="justify-center"
-              >
-                Create Service
-              </DropdownMenuItem>
+              {role === "admin" ? (
+                <>
+                  <DropdownMenuItem
+                    onClick={() => navigate("/createService")}
+                    className="justify-center"
+                  >
+                    Create Service
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => navigate("/manageServices")}
+                    className="justify-center"
+                  >
+                    Manage Services
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => navigate("/create")}
+                    className="justify-center"
+                  >
+                    Create Master
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => navigate("/manageMasters")}
+                    className="justify-center"
+                  >
+                    Manage Masters
+                  </DropdownMenuItem>
+                </>
+              ) : null}
               <DropdownMenuSeparator />
               <LogoutButton />
             </>

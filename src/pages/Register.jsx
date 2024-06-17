@@ -3,12 +3,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
+
+  const { isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/home");
+    }
+  }, [navigate, isAuthenticated]);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -92,7 +100,7 @@ const Register = () => {
 
             <div className="mt-4 flex justify-center gap-1 text-center text-sm">
               Have an account?
-              <Link to="/login" className="cursor-pointer underline">
+              <Link to="/" className="cursor-pointer underline">
                 Sign in
               </Link>
             </div>

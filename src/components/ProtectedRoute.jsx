@@ -2,10 +2,10 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+  const { role } = useAuth();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
+  if (role !== "admin") {
+    return <Navigate to="/home" replace />;
   }
   return children;
 };
