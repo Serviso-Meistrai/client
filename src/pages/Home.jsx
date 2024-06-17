@@ -1,11 +1,16 @@
 import MasterCard from "@/components/MasterCard";
 import { useAuth } from "@/contexts/AuthContext";
+import { useMaster } from "@/contexts/MastersContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = ({ filteredMasters, setMasters }) => {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  // PVZ kaip issitraukti masterius is Context
+  const { masters } = useMaster();
+  console.log(masters);
 
   useEffect(() => {
     if (!isAuthenticated) navigate("/");
