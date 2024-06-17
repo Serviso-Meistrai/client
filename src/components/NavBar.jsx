@@ -15,10 +15,13 @@ import { LogoutButton } from "./LogoutButton";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import ThemeSwitch from "./ThemeSwitch";
+import { useService } from "@/contexts/ServiceContext";
 
 const NavBar = ({ masters, setFilteredMasters }) => {
   const navigate = useNavigate();
   const { isAuthenticated, username, role } = useAuth();
+  const { services } = useService();
+  console.log(services);
 
   const [searchInput, setSearchInput] = useState("");
 

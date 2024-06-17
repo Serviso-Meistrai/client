@@ -1,5 +1,5 @@
-import { saveMaster } from "@/services/mastersServices";
-import { createContext, useContext, useReducer } from "react";
+import { getMasters, saveMaster } from "@/services/mastersServices";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const MastersContext = createContext();
 
@@ -12,6 +12,8 @@ const initialState = {
   img: "",
   serviceName: "",
   city: "",
+  masters: [],
+  filteredMasters: [],
 };
 
 function reducer(action, state) {
@@ -26,6 +28,16 @@ function reducer(action, state) {
         serviceName: action.payload.serviceName,
         city: action.payload.city,
       };
+    case "masters/set":
+      return {
+        ...state,
+        masters: action.payload,
+      };
+    case "masters/filtered":
+      return {
+        ...state,
+        filteredMasters: action.payload,
+      };
 
     default:
       return state;
@@ -35,6 +47,11 @@ function reducer(action, state) {
 function MastersProvider({ children }) {
   const [{ name, surname, specialization, img, serviceName, city }, dispatch] =
     useReducer(reducer, initialState);
+
+  // useEffect(() => {
+  //   const masters = getMasters();
+  //   console.log(masters);
+  // }, []);
 
   async function createMaster(
     name,

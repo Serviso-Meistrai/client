@@ -1,10 +1,11 @@
-import { saveService } from "@/services/servicesServices";
-import { createContext, useContext, useReducer } from "react";
+import { getServices, saveService } from "@/services/servicesServices";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const ServiceContext = createContext();
 
 const initialState = {
   name: "",
+  services: [],
 };
 
 function reducer(state, action) {
@@ -14,10 +15,10 @@ function reducer(state, action) {
         ...state,
         name: action.payload.name,
       };
-    case "service/edit":
+    case "service/set":
       return {
         ...state,
-        name: action.payload.name,
+        services: action.payload,
       };
     default:
       return state;
@@ -25,7 +26,19 @@ function reducer(state, action) {
 }
 
 function ServiceProvider({ children }) {
-  const [{ name }, dispatch] = useReducer(reducer, initialState);
+  const [{ name, services }, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    async function fetchServices() {
+      const setData = (services) => {
+        dispatch({ type: "service/set", payload: services });
+        console.log(services);
+      };
+      await getServices(setData);
+    }
+
+    fetchServices();
+  }, []);
 
   async function createService(name) {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -33,7 +46,9 @@ function ServiceProvider({ children }) {
   }
 
   return (
-    <ServiceContext.Provider value={{ name, createService, dispatch }}>
+    <ServiceContext.Provider
+      value={{ name, createService, services, dispatch }}
+    >
       {children}
     </ServiceContext.Provider>
   );
