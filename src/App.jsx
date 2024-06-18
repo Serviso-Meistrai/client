@@ -1,19 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./App.css";
+import ProtectedRoute from "./components/ProtectedRoute";
+import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreateMaster from "./pages/CreateMaster";
 import ManageMasters from "./pages/ManageMasters";
 import ManageServices from "./pages/ManageServices";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./contexts/AuthContext";
-import NavBar from "./components/NavBar";
-import { useState, useEffect } from "react";
-import { getMasters } from "./services/mastersServices";
-import { MastersProvider } from "./contexts/MastersContext";
 import CreateService from "./pages/CreateService";
+import { AuthProvider } from "./contexts/AuthContext";
+import { MastersProvider } from "./contexts/MastersContext";
 import { ServiceProvider } from "./contexts/ServiceContext";
+import { getMasters } from "./services/mastersServices";
 
 function App() {
   const [masters, setMasters] = useState([]);

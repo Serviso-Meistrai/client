@@ -23,7 +23,7 @@ export const saveService = (data, userToken, setData) => {
     .catch((err) => console.error(err));
 };
 //Update Service
-export const updateService = (data, serviceId, userToken, setData) => {
+export const updateService = (data, serviceId, userToken) => {
   axios
     .put(`http://localhost:5000/api/service/${serviceId}`, data, {
       headers: {
@@ -31,7 +31,7 @@ export const updateService = (data, serviceId, userToken, setData) => {
         "Content-Type": "application/json",
       },
     })
-    .then((res) => getServices(setData))
+    .then((res) => console.log(res))
     .catch((err) => console.error(err));
 };
 // Delete Service
