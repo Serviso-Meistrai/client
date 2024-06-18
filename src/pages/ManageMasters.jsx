@@ -1,23 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { getUserMasters } from "@/services/mastersServices";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 import MasterCard from "@/components/MasterCard";
+import { useMaster } from "@/contexts/MastersContext";
 
 const ManageMasters = () => {
-  const [userMasters, setUserMasters] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("userData"));
-    getUserMasters(setUserMasters, user.token);
-  }, []);
+  const { masters } = useMaster();
 
   return (
     <main className="min-h-[90vh]">
       <div className="grid gap-6 p-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-        {userMasters.length > 0 ? (
-          userMasters.map((master) => (
+        {masters?.length > 0 ? (
+          masters.map((master) => (
             <MasterCard master={master} key={master._id} isAdmin={true} />
           ))
         ) : (
