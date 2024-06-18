@@ -58,7 +58,6 @@ function MastersProvider({ children }) {
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-
   useEffect(() => {
     async function fetchMasters() {
       const mastersData = (master) => {
