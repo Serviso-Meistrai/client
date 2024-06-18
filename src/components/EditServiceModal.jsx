@@ -19,8 +19,7 @@ export const EditServiceModal = ({ service }) => {
   const userData = JSON.parse(localStorage.getItem("userData"));
 
   const handleSubmit = () => {
-    alert("nera update backo Matai");
-    // updateService(name, service._id, userData.token);
+    updateService({ name }, service._id, userData.token);
   };
 
   return (
