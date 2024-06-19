@@ -1,4 +1,5 @@
 import { DeleteButton } from "./DeleteButton";
+import { EditMasterModal } from "./EditMasterModal";
 import {
   Card,
   CardHeader,
@@ -13,7 +14,12 @@ const MasterCard = ({ master, setMasters, isAdmin }) => {
   return (
     <Card className="flex flex-col justify-between">
       <div className="flex justify-end p-3">
-        {isAdmin && <DeleteButton id={master._id} />}
+        {isAdmin && (
+          <>
+            <EditMasterModal master={master} />
+            <DeleteButton id={master._id} />
+          </>
+        )}
       </div>
       <CardHeader>
         <div>
